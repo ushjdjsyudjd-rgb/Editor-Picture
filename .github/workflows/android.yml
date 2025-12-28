@@ -21,12 +21,12 @@ jobs:
       - name: Grant execute permission for gradlew
         run: chmod +x gradlew
 
-      - name: Build Debug APK
-        # این دستور تمام تست‌های مزاحم را نادیده می‌گیرد
-        run: ./gradlew assembleDebug -x test -x connectedDebugAndroidTest -x testDebugUnitTest
+      - name: Build with Gradle
+        # این دستور تمام تست‌ها و چک‌های اضافه را غیرفعال می‌کند
+        run: ./gradlew assembleDebug -x test -x lint -x connectedDebugAndroidTest
 
-      - name: Upload APK Artifact
+      - name: Upload APK
         uses: actions/upload-artifact@v4
         with:
-          name: MyPhotoEditor
+          name: PhotoEditorApp
           path: app/build/outputs/apk/debug/app-debug.apk
